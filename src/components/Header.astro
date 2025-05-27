@@ -1,54 +1,119 @@
 ---
+// Tidak ada import komponen Socials lagi
 ---
 
 <header>
   <nav>
     <a href="/" class="logo">My News Site</a>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About Us</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-    </nav>
+    <div class="nav-links-and-icons">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <div class="header-icons">
+        <button class="icon-button" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7 0 0010.607 10.607z" />
+          </svg>
+        </button>
+        <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode">
+          <svg class="dark-mode-icon moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.613.764-3.81M12 21.75V12m0 0l3.097-5.551M12 12l-3.097-5.551M12 12V2.25" />
+          </svg>
+          <svg class="dark-mode-icon sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m18.364 4.864l-1.414 1.414M6.05 6.05L4.636 4.636m16.772 0l-1.414-1.414M6.05 17.95l-1.414 1.414" />
+          </svg>
+        </button>
+        <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
 </header>
 
 <style>
-  header {
-    margin: 0em 0 2em;
-  }
-
-  nav {
+  .nav-links-and-icons {
     display: flex;
     align-items: center;
-    justify-content: space-between;
   }
 
-  .logo {
-    font-size: 1.5em; /* BARIS INI KRUSIAL, PASTIKAN HANYA ADA INI */
-    font-weight: 700;
-    color: #000; /* Warna teks logo */
-    text-decoration: none;
-  }
-
-  ul {
+  .header-icons {
     display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    align-items: center;
+    margin-left: 2em; /* Jarak antara navigasi dan ikon */
   }
 
-  ul li {
-    margin-left: 2em;
-  }
-
-  ul li a {
-    text-decoration: none;
-    color: #555;
-    font-weight: 500;
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5em;
+    margin-left: 0.5em;
+    color: var(--color-text-secondary); /* Warna abu-abu untuk ikon */
     transition: color 0.2s ease-in-out;
   }
 
-  ul li a:hover {
-    color: #007bff; /* Warna hover tautan */
+  .icon-button:hover {
+    color: var(--color-primary); /* Warna merah saat hover */
+  }
+
+  .icon-button svg {
+    width: 1.5em; /* Ukuran ikon */
+    height: 1.5em;
+    display: block; /* Menghilangkan spasi ekstra di bawah SVG */
+  }
+
+  /* Logika menampilkan ikon dark mode */
+  .dark-mode-icon {
+    display: none;
+  }
+
+  html.light .sun {
+    display: block; /* Tampilkan ikon matahari di mode terang */
+  }
+
+  html.dark .moon {
+    display: block; /* Tampilkan ikon bulan di mode gelap */
+  }
+
+  /* Mobile menu toggle button (untuk hamburger) */
+  .mobile-menu-toggle {
+    display: none; /* Sembunyikan di desktop */
+  }
+
+  @media (max-width: 768px) {
+    .nav-links-and-icons ul {
+      display: none; /* Sembunyikan menu navigasi default di mobile */
+    }
+
+    .header-icons {
+      margin-left: auto; /* Dorong ikon ke kanan */
+    }
+
+    .icon-button {
+      margin-left: 1em; /* Atur jarak ikon */
+    }
+
+    .mobile-menu-toggle {
+      display: block; /* Tampilkan tombol hamburger */
+      margin-left: 1em; /* Jarak dari ikon lain */
+    }
   }
 </style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('header nav ul');
+
+    if (mobileMenuToggle && navLinks) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+    }
+  });
+</script>
