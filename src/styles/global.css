@@ -1,57 +1,101 @@
-/* src/styles/global.css */
+/* ==================================================================== */
+/* src/styles/global.css - Gaya Global, Font, dan Variabel Warna */
+/* ==================================================================== */
+
+/* Import Google Fonts */
+/* Merriweather untuk judul (serif) */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+/* Inter untuk body text (sans-serif) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* --- Variabel Warna (Light Mode Default) --- */
 :root {
-  --color-primary: #007bff;
-  --color-secondary: #6c757d;
-  --color-text: #333;
-  --color-background: #f8f9fa;
-  --color-light-gray: #e9ecef;
+  /* Umum */
+  --color-primary: #DC3545; /* Merah Kuat */
+  --color-primary-hover: #C82333; /* Merah Lebih Dalam */
+  --color-accent: #DAA520; /* Emas/Kuning Gelap */
+
+  /* Background & Border */
+  --color-background-light: #FFFFFF; /* Putih */
+  --color-background-medium: #F8F9FA; /* Abu-abu Terang untuk Section */
+  --color-background-card: #FFFFFF; /* Latar belakang kartu */
+  --color-border: #E9ECEF; /* Border halus */
+
+  /* Teks */
+  --color-text-primary: #212529; /* Abu-abu Gelap (Teks Utama) */
+  --color-text-secondary: #555555; /* Abu-abu Sedang (Deskripsi, Meta) */
+  --color-text-link: var(--color-primary); /* Warna link default */
+}
+
+/* --- Variabel Warna (Dark Mode) --- */
+/* Kapanpun class 'dark' ditambahkan ke <html>, gunakan variabel ini */
+html.dark {
+  --color-background-light: #121212; /* Abu-abu Sangat Gelap */
+  --color-background-medium: #1F1F1F; /* Abu-abu Gelap untuk Section */
+  --color-background-card: #282828; /* Latar belakang kartu gelap */
+  --color-border: #3A3A3A; /* Border gelap */
+
+  --color-text-primary: #E0E0E0; /* Putih Kebiruan */
+  --color-text-secondary: #A0A0A0; /* Abu-abu Lebih Terang */
+  --color-text-link: var(--color-primary); /* Merah tetap merah */
+}
+
+
+/* --- Reset CSS dan Gaya Dasar --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Inter', sans-serif; /* Default body font */
   margin: 0;
   padding: 0;
-  background-color: var(--color-background);
-  color: var(--color-text);
+  background-color: var(--color-background-light);
+  color: var(--color-text-primary);
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transisi untuk Dark Mode */
 }
 
-main {
-  max-width: 1000px;
-  margin: 2em auto;
-  padding: 0 1em;
-}
-
+/* Judul (Headings) */
 h1, h2, h3, h4, h5, h6 {
-  color: #222;
+  font-family: 'Merriweather', serif; /* Font serif untuk judul */
+  color: var(--color-text-primary);
   line-height: 1.2;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
 }
 
+h1 { font-size: 2.8em; } /* Akan di-override di Hero Section */
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+h4 { font-size: 1.4em; }
+
+/* Tautan (Links) */
 a {
-  color: var(--color-primary);
+  color: var(--color-text-link);
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 
 a:hover {
   text-decoration: underline;
+  color: var(--color-primary-hover); /* Merah yang lebih gelap saat hover */
 }
 
-/* Styles for Header.astro (can be moved into Header.astro if preferred) */
-header nav {
-  background-color: #fff;
-  padding: 1em 2em;
-  border-bottom: 1px solid var(--color-light-gray);
+/* Utilitas Umum */
+.container {
+  max-width: 1200px; /* Lebar maksimum konten */
+  margin: 0 auto;
+  padding: 0 1.5em; /* Padding samping */
 }
 
-/* Example for a simple Footer (create src/components/Footer.astro) */
-footer {
-  text-align: center;
-  padding: 2em;
-  margin-top: 3em;
-  background-color: #333;
-  color: #fff;
-}
+/* ==================================================================== */
+/* Gaya untuk Komponen */
+/* (Akan didefinisikan lebih detail di file komponen masing-masing) */
+/* ==================================================================== */
 
-footer p {
-  margin: 0;
-}
+/* Header */
