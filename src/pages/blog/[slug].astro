@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, getEntryBySlug } from 'astro:content';
+
+// Mengambil semua slug dari koleksi 'blog'
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: Awaited<ReturnType<typeof getCollection>>[number];
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title={entry.data.title}>
+  <article class="news-article">
+    <h1 class="article-title">{entry.data.title}</h1>
+    <p class="article-meta">
+      Published on: {entry.data.pubDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+      {entry.data.tags && entry.data.tags.length > 0 && (
+        <span class="tags-container">
+          {entry.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </span>
+      )}
+    </p>
+    {entry.data.heroImage && (
+      <img src={entry.data.heroImage} alt={entry.data.title} class="hero-image" />
+    )}
+    <div class="article-content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .news-article {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em 0;
+  }
+
+  .article-title {
+    font-size: 2.8em;
+    margin-bottom: 0.5em;
+    color: #222;
+  }
+
+  .article-meta {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 1.5em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 2em;
+  }
+
+  .article-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .article-content h1, .article-content h2, .article-content h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+  }
+
+  .article-content p {
+    margin-bottom: 1em;
+  }
+
+  .article-content ul, .article-content ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  .tags-container {
+    margin-left: 1em;
+  }
+
+  .tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    color: #555;
+    padding: 0.2em 0.7em;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-right: 0.5em;
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+---
+
+<header>
+  <nav>
+    <a href="/" class="logo">My News Site</a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    </nav>
+</header>
+
+<style>
+  header {
+    margin: 0em 0 2em;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.5em; /* BARIS INI KRUSIAL, PASTIKAN HANYA ADA INI */
+    font-weight: 700;
+    color: #000; /* Warna teks logo */
+    text-decoration: none;
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  ul li {
+    margin-left: 2em;
+  }
+
+  ul li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+
+  ul li a:hover {
+    color: #007bff; /* Warna hover tautan */
+  }
+</style>

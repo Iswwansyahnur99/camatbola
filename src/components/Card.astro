@@ -1,0 +1,83 @@
+---
+export interface Props {
+  title: string;
+  pubDate: string;
+  description: string;
+  href: string;
+  tags?: string[]; // Tambahkan ini jika ingin tag berita
+}
+
+const { title, pubDate, description, href, tags } = Astro.props;
+---
+
+<a href={href} class="card-link">
+  <div class="card">
+    <div class="card-content">
+      <h2 class="card-title">{title}</h2>
+      <p class="card-pubdate">{pubDate}</p>
+      <p class="card-description">{description}</p>
+      {tags && tags.length > 0 && (
+        <div class="card-tags">
+          {tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+      )}
+    </div>
+  </div>
+</a>
+
+<style>
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card {
+    margin-bottom: 2em;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-content {
+    padding: 1.5em;
+  }
+
+  .card-title {
+    margin: 0 0 0.5em 0;
+    font-size: 1.8em;
+    color: #333;
+  }
+
+  .card-pubdate {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 1em;
+  }
+
+  .card-description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  .card-tags {
+    margin-top: 1em;
+  }
+
+  .tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    color: #555;
+    padding: 0.3em 0.8em;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-right: 0.5em;
+  }
+</style>
